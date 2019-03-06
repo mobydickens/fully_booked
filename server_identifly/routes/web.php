@@ -11,6 +11,5 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/butterflies', 'ButterflyController@getAll');
+Route::post('/butterflies', 'ButterflyController@create');

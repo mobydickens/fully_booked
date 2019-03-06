@@ -3,3 +3,12 @@
   padding: 0;
   margin: 0;
 }
+
+.title {
+  font-family: 'Rock Salt', cursive;
+}
+
+/* .sidebar-text {
+  font-family: 'Shadows Into Light', cursive;
+} */
+/* font-family: 'Caveat', cursive; */
