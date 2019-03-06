@@ -7,7 +7,7 @@ class Butterflies extends Component {
     let butterflyList = this.props.types.map(type => {
       return type.butterflies.map(butterfly => {
         return(
-          <div className='border p-2' key={butterfly.id}>
+          <div className='border m-2 p-2' key={butterfly.id}>
             <h3>{butterfly.name}</h3>
             <h4>{butterfly.scientific_name}</h4>
             <p>{butterfly.region}</p>
