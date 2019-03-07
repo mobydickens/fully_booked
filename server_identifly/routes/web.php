@@ -12,4 +12,5 @@
 */
 
 Route::get('/butterflies', 'ButterflyController@getAll');
+Route::get('/types', 'ButterflyController@getTypes');
 Route::post('/butterflies', 'ButterflyController@create');

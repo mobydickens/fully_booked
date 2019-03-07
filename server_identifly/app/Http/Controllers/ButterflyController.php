@@ -13,4 +13,9 @@ class ButterflyController extends Controller
     $types = Type::with('butterflies')->get()->all();
     return $types;
   }
+  public function getTypes()
+  {
+    $types = Type::all();
+    return $types;
+  }
 }

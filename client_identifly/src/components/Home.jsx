@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import butterflyLogo from '../pictures/beautiful-butterfly-silhouette.svg'
 import TypesSidebar from './TypesSidebar';
 import Butterflies from './Butterflies';
+import Header from './Header';
 
 class Home extends Component {
 
@@ -20,10 +20,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <div className='d-flex p-4 bg-primary text-white'>
-          <h1 className='text-center title mr-4'>IDENTIFLY</h1>
-          <img src={butterflyLogo} alt="buttfly"/>
-        </div>
+        <Header />
         <div className='container-fluid'>
           <div className='row'>
             <TypesSidebar types={this.state.butterflyInfo}/>
