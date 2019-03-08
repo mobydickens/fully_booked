@@ -27,8 +27,8 @@ class Butterflies extends Component {
               <h3>{butterfly.name}</h3>
               <h4>{butterfly.scientific_name}</h4>
               <p>{butterfly.region}</p>
+              <p>About: {butterfly.behavior}</p>
               <p>Description: {butterfly.description}</p>
-              <p>Behavior: {butterfly.behavior}</p>
             </div>
             <div>
               <img className='img-fluid rounded' src={butterfly.photo_url} alt="butterfly"/>
@@ -47,8 +47,8 @@ class Butterflies extends Component {
               <h3>{butterfly.name}</h3>
               <h4>{butterfly.scientific_name}</h4>
               <p>{butterfly.region}</p>
+              <p>About: {butterfly.behavior}</p>
               <p>Description: {butterfly.description}</p>
-              <p>Behavior: {butterfly.behavior}</p>
             </div>
             <div>
               <img className='img-fluid rounded' src={butterfly.photo_url} alt="butterfly"/>
@@ -72,10 +72,10 @@ class Butterflies extends Component {
         { this.props.filteredType === 'All' ?
         <div>
           {pageList}
-            <nav className='ml-5' aria-label="Page navigation example">
+            <nav className='ml-5'>
               <ul className="pagination">
-                <li className="page-item"><button className={this.state.currentPage === 1 ? "page-link btn disabled" : "page-link"} onClick={()=>this.previousPage()}>Previous</button></li>
-                <li className="page-item"><button className={this.state.currentPage === numberOfPages ? "page-link btn disabled" : "page-link"} onClick={()=>this.nextPage()}>Next</button></li>
+                {this.state.currentPage === 1 ? "" : <li className="page-item"><button className="page-link" onClick={()=>this.previousPage()}>Previous</button></li>}
+                {this.state.currentPage === numberOfPages ? "" : <li className="page-item"><button className="page-link" onClick={()=>this.nextPage()}>Next</button></li>}
               </ul>
             </nav>
         </div>
