@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Butterfly;
 use App\Type;
+use App\Sighting;
 
 class ButterflyController extends Controller
 {
@@ -19,6 +20,11 @@ class ButterflyController extends Controller
   {
     $types = Type::all();
     return $types;
+  }
+
+  public function getSighting() {
+    $sightings = Sighting::all();
+    return $sightings;
   }
 
   public function create(Request $request)
