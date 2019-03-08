@@ -7,7 +7,8 @@ import Header from './Header';
 class Home extends Component {
 
   state = {
-    butterflyInfo: []
+    butterflyInfo: [],
+    filterType: 'All'
   }
 
   async componentDidMount() {
@@ -17,14 +18,20 @@ class Home extends Component {
     })
   }
 
+  filterTypeBy = (type) => {
+    this.setState({
+      filterType: type
+    })
+  }
+
   render() {
     return (
       <div>
         <Header />
         <div className='container-fluid'>
           <div className='row'>
-            <TypesSidebar types={this.state.butterflyInfo}/>
-            <Butterflies types={this.state.butterflyInfo}/>
+            <TypesSidebar filterFn={this.filterTypeBy} types={this.state.butterflyInfo}/>
+            <Butterflies filteredType={this.state.filterType} types={this.state.butterflyInfo}/>
           </div>
         </div>
         {/* <div className='p-4'>Icons made by <a 

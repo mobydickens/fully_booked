@@ -21,7 +21,7 @@ class ButterflyController extends Controller
     return $types;
   }
 
-  public function store(Request $request)
+  public function create(Request $request)
   {
     $validatedData = $request->validate([
       'name' => 'required',

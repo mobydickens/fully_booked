@@ -24,9 +24,9 @@ class NewButterfly extends Component {
     })
   }
 
-  async submitButterfly() {
+  submitButterfly = async () => {
     let { name, scientificName, region, type, description, behavior, photo_url, foodplants } = this.state;
-    let res = await axios.post('/newbutterfly', 
+    await axios.post('/new', 
       {
         name: name, 
         scientific_name: scientificName,
@@ -37,18 +37,16 @@ class NewButterfly extends Component {
         photo_url: photo_url,
         larvel_foodplants: foodplants   
       });
-    if (res) {
-      this.setState({
-        name: '',
-        scientificName: '',
-        region: '',
-        type: '',
-        description: '',
-        behavior: '',
-        photo_url: '',
-        foodplants: ''
-      })
-    }
+    this.setState({
+      name: '',
+      scientificName: '',
+      region: '',
+      type: '',
+      description: '',
+      behavior: '',
+      photo_url: '',
+      foodplants: ''
+    })
   }
 
   render() {
@@ -63,9 +61,9 @@ class NewButterfly extends Component {
     return (
       <div>
         <Header />
-        <div className='container-fluid mt-2'>
+        <div className='container-fluid m-3'>
           <div className='row'>
-            <form className='col m-4'>
+            <form className='col-md-6 m-4'>
               <h3>Add a missing butterfly</h3>
               <div className='form-row pl-2'>
                 <div className='form-group col'>
@@ -156,10 +154,10 @@ class NewButterfly extends Component {
               </div>
               <button 
                 className='btn btn-success'
-                onClick={ ()=>this.submitButterfly()}>Submit</button>
+                onClick={ ()=>this.submitButterfly() }>Submit</button>
             </form>
-            <div className="col-md-3 mr-4 mt-5">
-              <img className='card-img-top rounded' src={californiat} alt="cali-tortoiseshell"/>
+            <div className="col-md-4 mt-5">
+              <img className='card-img-top rounded shadow' src={californiat} alt="cali-tortoiseshell"/>
               <div className="card-body">
                 <h4 className="card-text">California Tortoiseshell</h4>
               </div>

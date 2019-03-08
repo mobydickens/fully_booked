@@ -7,8 +7,8 @@ class Butterflies extends Component {
     let butterflyList = this.props.types.map(type => {
       return type.butterflies.map(butterfly => {
         return(
-          <div className='d-flex border m-4 p-4'>
-            <div key={butterfly.id}>
+          <div key={butterfly.id} className='d-flex border m-4 p-4'>
+            <div>
               <h3>{butterfly.name}</h3>
               <h4>{butterfly.scientific_name}</h4>
               <p>{butterfly.region}</p>
@@ -22,10 +22,34 @@ class Butterflies extends Component {
           )
         })
       })
-    console.log(butterflyList)
+
+    let filteredList = this.props.types.map(type => {
+      return type.butterflies.map(butterfly => {
+        if(butterfly.type_id === this.props.filteredType) {
+        return(
+          <div key={butterfly.id} className='d-flex border m-4 p-4'>
+            <div>
+              <h3>{butterfly.name}</h3>
+              <h4>{butterfly.scientific_name}</h4>
+              <p>{butterfly.region}</p>
+              <p>Description: {butterfly.description}</p>
+              <p>Behavior: {butterfly.behavior}</p>
+            </div>
+            <div>
+              <img className='img-fluid rounded' src={butterfly.photo_url} alt="butterfly"/>
+            </div>
+          </div>
+          )}
+        })
+    })
+    
     return (
       <div className='p-4 col'>
-        {butterflyList}
+        { this.props.filteredType === 'All' ?
+        butterflyList
+        : 
+        filteredList
+        }
       </div>
     );
   }

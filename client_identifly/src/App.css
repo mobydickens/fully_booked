@@ -8,6 +8,14 @@
   font-family: 'Rock Salt', cursive;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
+.back-hover:hover {
+  background-color: rgb(238, 238, 238);
+}
+
 /* .sidebar-text {
   font-family: 'Shadows Into Light', cursive;
 } */
