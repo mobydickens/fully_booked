@@ -2,6 +2,21 @@ import React, { Component } from 'react';
 
 class Butterflies extends Component {
 
+  state = {
+    currentPage: 1,
+  }
+
+  previousPage = () => {
+    this.setState({
+      currentPage: this.state.currentPage -= 1
+    })
+  }
+
+  nextPage = () => {
+    this.setState({
+      currentPage: this.state.currentPage += 1
+    })
+  }
 
   render() {
     let butterflyList = this.props.types.map(type => {
@@ -42,11 +57,28 @@ class Butterflies extends Component {
           )}
         })
     })
+
+    //PAGINATION
+    var mergedButterflyArrays = [].concat.apply([], butterflyList);
+    var numberPerPage = 5;
+    let numberOfPages = Math.ceil(mergedButterflyArrays.length / numberPerPage);
+    let begin = ((this.state.currentPage - 1 ) * numberPerPage );
+    let end = begin + numberPerPage;
+    let pageList = mergedButterflyArrays.slice(begin, end);
+    // PAGINATION
     
     return (
       <div className='p-4 col'>
         { this.props.filteredType === 'All' ?
-        butterflyList
+        <div>
+          {pageList}
+            <nav className='ml-5' aria-label="Page navigation example">
+              <ul className="pagination">
+                <li className="page-item"><button className={this.state.currentPage === 1 ? "page-link btn disabled" : "page-link"} onClick={()=>this.previousPage()}>Previous</button></li>
+                <li className="page-item"><button className={this.state.currentPage === numberOfPages ? "page-link btn disabled" : "page-link"} onClick={()=>this.nextPage()}>Next</button></li>
+              </ul>
+            </nav>
+        </div>
         : 
         filteredList
         }
@@ -56,3 +88,6 @@ class Butterflies extends Component {
 }
 
 export default Butterflies;
+
+
+
