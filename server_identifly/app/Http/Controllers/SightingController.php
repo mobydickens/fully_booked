@@ -19,11 +19,11 @@ class SightingController extends Controller
       'date_sighted' => 'required',
       'location' => 'required',
       'notes' => 'required',
-      'photo' => 'required',
       'sighted_by' => 'required'
     ]);
 
     $sighting = Sighting::create($validatedData);
+    
     return redirect()->back();
   }
 }

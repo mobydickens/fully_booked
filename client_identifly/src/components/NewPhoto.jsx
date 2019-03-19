@@ -8,8 +8,9 @@ class NewPhoto extends Component {
 
   save = async () => {
     await axios.post('/newphoto', { photo_url: this.state.photo_url, sighting_id: this.props.sightingId } )
-    this.setState({ photo: '' });
+    this.setState({ photo_url: '' });
     this.props.hideFn();
+    this.props.getPhotosFn();
   }
 
   render() {

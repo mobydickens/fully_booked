@@ -20,6 +20,7 @@ class Butterflies extends Component {
   }
 
   render() {
+    
     let butterflyList = this.props.types.map(type => {
       return type.butterflies.map(butterfly => {
         return(

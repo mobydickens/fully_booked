@@ -19,5 +19,5 @@ Route::post('/new', 'ButterflyController@create');
 Route::get('/sighting', 'SightingController@getAll');
 Route::post('/newsighting', 'SightingController@create');
 
-Route::get('/getphotos/{id}', 'PhotoController@getPhotos');
+Route::get('/getphotos', 'PhotoController@getPhotos');
 Route::post('/newphoto', 'PhotoController@create');
