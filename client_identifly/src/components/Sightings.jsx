@@ -9,7 +9,8 @@ class Sightings extends Component {
   state = {
     sightings: [],
     butterflies: [],
-    currentPage: 1
+    currentPage: 1,
+    largePictureId: ''
   }
 
   previousPage = () => {
@@ -35,6 +36,10 @@ class Sightings extends Component {
     this.setState({ sightings: res.data })
   }
 
+  reduce = (id) => {
+    this.setState({ largePictureId: ''})
+  }
+
   render() {
 
     let sortedSightings = this.state.sightings.sort((a,b)=>new moment(b.date_sighted).format('YYYYMMDD') - new moment(a.date_sighted).format('YYYYMMDD'));
@@ -50,10 +55,24 @@ class Sightings extends Component {
             <p className='m-0'>{sighting.location}</p>
             <p className='m-0'>{sighting.notes}</p>
           </div>
+          { this.state.largePictureId === sighting.id 
+            ?
+            //LARGE PHOTO
           <div>
-            <div style={{width: 100, height: 100, backgroundImage: 'url('+ sighting.photo +')', backgroundSize: 'cover' }}></div>
+            <div 
+              style={{width: 500, height: 500, backgroundImage: 'url('+ sighting.photo +')', backgroundSize: 'cover', cursor: 'pointer' }}
+              onClick={()=>this.reduce(sighting.id)}></div>
             <small>Seen by {sighting.sighted_by}</small>
           </div>
+            : 
+            //SMALL PHOTO
+          <div>
+            <div 
+              style={{width: 100, height: 100, backgroundImage: 'url('+ sighting.photo +')', backgroundSize: 'cover', cursor: 'pointer' }}
+              onClick={()=>this.setState({ largePictureId: sighting.id })}></div>
+            <small>Seen by {sighting.sighted_by}</small>
+          </div>
+          }
         </div>
       )
     })
