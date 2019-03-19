@@ -30,7 +30,7 @@ class Butterflies extends Component {
               <p>About: {butterfly.behavior}</p>
               <p>Description: {butterfly.description}</p>
             </div>
-            <div>
+            <div className='ml-4'>
               <div style={{width: 300, height: 300, backgroundImage: 'url('+ butterfly.photo_url +')', backgroundSize: 'cover'}} className='rounded'></div>
             </div>
           </div>
@@ -52,7 +52,7 @@ class Butterflies extends Component {
                 <p>About: {butterfly.behavior}</p>
                 <p>Description: {butterfly.description}</p>
               </div>
-              <div>
+              <div className='ml-4'>
                 <div style={{width: 300, height: 300, backgroundImage: 'url('+ butterfly.photo_url +')', backgroundSize: 'cover' }} className='rounded'></div>
               </div>
             </div>

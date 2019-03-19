@@ -8,7 +8,20 @@ class Sightings extends Component {
 
   state = {
     sightings: [],
-    butterflies: []
+    butterflies: [],
+    currentPage: 1
+  }
+
+  previousPage = () => {
+    this.setState({
+      currentPage: this.state.currentPage - 1
+    })
+  }
+
+  nextPage = () => {
+    this.setState({
+      currentPage: this.state.currentPage +  1
+    })
   }
 
   componentDidMount = async () => {
@@ -44,6 +57,14 @@ class Sightings extends Component {
         </div>
       )
     })
+
+    //PAGINATION SETUP
+    let numberPerPage = 10;
+    let numberOfPages = Math.ceil(sightingsList.length / numberPerPage);
+    let begin = ((this.state.currentPage - 1 ) * numberPerPage );
+    let end = begin + numberPerPage;
+    let pageList = sightingsList.slice(begin, end);
+
     return (
       <div>
         <Header />
@@ -55,7 +76,15 @@ class Sightings extends Component {
             <div className='h-100 col m-4'>
               <h3 className='col'>Sightings</h3>
               <div>
-                {sightingsList}
+                {pageList}
+                {/* PAGINATION NAVIGATION */}
+                <nav className='ml-5'>
+                  <ul className="pagination">
+                    {this.state.currentPage === 1 ? "" : <li className="page-item"><button className="mt-2 page-link" onClick={()=>this.previousPage()}>Previous</button></li>}
+                    {this.state.currentPage === numberOfPages ? "" : <li className="page-item"><button className="mt-2 page-link" onClick={()=>this.nextPage()}>Next</button></li>}
+                  </ul>
+                </nav>
+                {/* END PAGINATION NAVIGATION */}
               </div>
             </div>
           </div>
