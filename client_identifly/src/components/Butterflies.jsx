@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Pagination from './Pagination';
 
 class Butterflies extends Component {
 
@@ -60,30 +61,15 @@ class Butterflies extends Component {
       })
     })
 
-    //PAGINATION
     var mergedButterflyArrays = [].concat.apply([], butterflyList);
     var numberPerPage = 5;
     let numberOfPages = Math.ceil(mergedButterflyArrays.length / numberPerPage);
-    let begin = ((this.state.currentPage - 1 ) * numberPerPage );
-    let end = begin + numberPerPage;
-    let pageList = mergedButterflyArrays.slice(begin, end);
-    // PAGINATION
     
     return (
       <div className='p-4 col'>
-        { this.props.filteredType === 'All' ?
-        <div>
-          {pageList}
-            <nav className='ml-5'>
-              <ul className="pagination">
-                {this.state.currentPage === 1 ? "" : <li className="page-item"><button className="mt-2 page-link" onClick={()=>this.previousPage()}>Previous</button></li>}
-                {this.state.currentPage === numberOfPages ? "" : <li className="page-item"><button className="mt-2 page-link" onClick={()=>this.nextPage()}>Next</button></li>}
-              </ul>
-            </nav>
-        </div>
-        : 
-        filteredList
-        }
+        { this.props.filteredType === 'All' 
+        ? <Pagination numberOfPages={numberOfPages} numberPerPage={numberPerPage} list={mergedButterflyArrays}/>
+        : filteredList }
       </div>
     );
   }

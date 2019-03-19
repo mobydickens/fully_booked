@@ -3,26 +3,19 @@ import Header from './Header';
 import NewSighting from './NewSighting';
 import axios from 'axios';
 import moment from 'moment';
+import NewPhoto from './NewPhoto';
+import Photos from './Photos';
+import Pagination from './Pagination';
 
 class Sightings extends Component {
 
   state = {
     sightings: [],
     butterflies: [],
-    currentPage: 1,
-    largePictureId: ''
-  }
-
-  previousPage = () => {
-    this.setState({
-      currentPage: this.state.currentPage - 1
-    })
-  }
-
-  nextPage = () => {
-    this.setState({
-      currentPage: this.state.currentPage +  1
-    })
+    largePictureId: '',
+    show: false,
+    editId: '',
+    photo: ''
   }
 
   componentDidMount = async () => {
@@ -36,8 +29,8 @@ class Sightings extends Component {
     this.setState({ sightings: res.data })
   }
 
-  reduce = (id) => {
-    this.setState({ largePictureId: ''})
+  hide = () => {
+    this.setState({ show: false })
   }
 
   render() {
@@ -51,28 +44,19 @@ class Sightings extends Component {
             <div className='d-flex'>
               <h5>{buttfly[0].name}</h5>
               <p className='m-0 ml-4'><small>{moment(sighting.date_sighted).format('MMMM Do YYYY')}</small></p>
+              <small onClick={()=>this.setState({ show: !this.state.show, editId: sighting.id })}>
+                <i style={{ cursor: 'pointer'}} className="ml-4 text-muted fas fa-folder-plus"></i>  
+              </small>
+
+              {this.state.show && this.state.editId === sighting.id ? <NewPhoto sightingId={sighting.id} hideFn={this.save}/> : "" }
+
             </div>
+
             <p className='m-0'>{sighting.location}</p>
             <p className='m-0'>{sighting.notes}</p>
+             
           </div>
-          { this.state.largePictureId === sighting.id 
-            ?
-            //LARGE PHOTO
-          <div>
-            <div 
-              style={{width: 500, height: 500, backgroundImage: 'url('+ sighting.photo +')', backgroundSize: 'cover', cursor: 'pointer' }}
-              onClick={()=>this.reduce(sighting.id)}></div>
-            <small>Seen by {sighting.sighted_by}</small>
-          </div>
-            : 
-            //SMALL PHOTO
-          <div>
-            <div 
-              style={{width: 100, height: 100, backgroundImage: 'url('+ sighting.photo +')', backgroundSize: 'cover', cursor: 'pointer' }}
-              onClick={()=>this.setState({ largePictureId: sighting.id })}></div>
-            <small>Seen by {sighting.sighted_by}</small>
-          </div>
-          }
+          <Photos sightedBy={sighting.sighted_by} sightingId={sighting.id} />
         </div>
       )
     })
@@ -80,9 +64,6 @@ class Sightings extends Component {
     //PAGINATION SETUP
     let numberPerPage = 10;
     let numberOfPages = Math.ceil(sightingsList.length / numberPerPage);
-    let begin = ((this.state.currentPage - 1 ) * numberPerPage );
-    let end = begin + numberPerPage;
-    let pageList = sightingsList.slice(begin, end);
 
     return (
       <div>
@@ -94,17 +75,7 @@ class Sightings extends Component {
             </div>
             <div className='h-100 col m-4'>
               <h3 className='col'>Sightings</h3>
-              <div>
-                {pageList}
-                {/* PAGINATION NAVIGATION */}
-                <nav className='ml-5'>
-                  <ul className="pagination">
-                    {this.state.currentPage === 1 ? "" : <li className="page-item"><button className="mt-2 page-link" onClick={()=>this.previousPage()}>Previous</button></li>}
-                    {this.state.currentPage === numberOfPages ? "" : <li className="page-item"><button className="mt-2 page-link" onClick={()=>this.nextPage()}>Next</button></li>}
-                  </ul>
-                </nav>
-                {/* END PAGINATION NAVIGATION */}
-              </div>
+              <Pagination numberOfPages={numberOfPages} numberPerPage={numberPerPage} list={sightingsList}/>
             </div>
           </div>
         </div>

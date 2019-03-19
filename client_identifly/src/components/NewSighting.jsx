@@ -14,15 +14,14 @@ class NewSighting extends Component {
   }
 
   submitSighting = async () => {
-    let { butterfly_id, date_sighted, location, notes, sighted_by, photo } = this.state;
-    await axios.post('/newsighting', { butterfly_id, date_sighted, location, notes, sighted_by, photo });
+    let { butterfly_id, date_sighted, location, notes, sighted_by } = this.state;
+    await axios.post('/newsighting', { butterfly_id, date_sighted, location, notes, sighted_by });
     this.setState({
       butterfly_id: '',
       date_sighted: '',
       location: '',
       notes: '',
-      sighted_by: '',
-      photo: ''
+      sighted_by: ''
     })
     this.props.refreshSightings();
   }
@@ -85,15 +84,7 @@ class NewSighting extends Component {
             type="text"
             value={ this.state.sighted_by }
             onChange={(e)=>this.setState({ sighted_by: e.target.value })}/>
-        </div>
-        <div className='formgroup'>
-          <label htmlFor="photo">Photo URL</label>
-          <input 
-            className='form-control' 
-            value={ this.state.photo }
-            type="text"
-            onChange={(e)=>this.setState({ photo: e.target.value })}/>
-        </div>
+        </div>  
         <button onClick={()=>this.submitSighting()}className='btn btn-success mt-2'>Submit!</button>
         <p className='mt-4'>No matching butterfly? <Link to='/newbutterfly'><button className='btn btn-info'>Add a new butterfly</button></Link></p>
       </form>
