@@ -23,7 +23,7 @@ class Sightings extends Component {
   }
 
   render() {
-
+    //test
     let sortedSightings = this.state.sightings.sort((a,b)=>new moment(b.date_sighted).format('YYYYMMDD') - new moment(a.date_sighted).format('YYYYMMDD'));
     let sightingsList = sortedSightings.map(sighting => {
       let buttfly = this.state.butterflies.filter(butterfly => sighting.butterfly_id === butterfly.id );
