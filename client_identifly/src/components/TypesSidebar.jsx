@@ -13,7 +13,7 @@ class TypesSidebar extends Component {
     })
 
     return (
-      <div className='p-4 col-lg-2'>
+      <div className='m-4 p-4 col-lg-2'>
         <Link to='/newbutterfly'><button className='btn btn-success mb-4'>Add missing butterfly</button></Link>
         <Link to='/sightings'><button className='btn btn-info mb-4'>Sightings</button></Link>
         <h3>Browse Types</h3>
