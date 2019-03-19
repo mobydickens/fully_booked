@@ -2,10 +2,11 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0; 
-  /* font-family: 'Caveat', cursive;
-  font-family: 'Shadows Into Light', cursive; */
+  
 }
-
+p {
+  font-family: 'Alegreya Sans', sans-serif;
+}
 .title {
   font-family: 'Rock Salt', cursive;
 }
