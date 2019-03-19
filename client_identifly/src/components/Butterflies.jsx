@@ -8,13 +8,13 @@ class Butterflies extends Component {
 
   previousPage = () => {
     this.setState({
-      currentPage: this.state.currentPage -= 1
+      currentPage: this.state.currentPage - 1
     })
   }
 
   nextPage = () => {
     this.setState({
-      currentPage: this.state.currentPage += 1
+      currentPage: this.state.currentPage +  1
     })
   }
 
@@ -22,7 +22,7 @@ class Butterflies extends Component {
     let butterflyList = this.props.types.map(type => {
       return type.butterflies.map(butterfly => {
         return(
-          <div key={butterfly.id} className='d-flex border m-4 p-4'>
+          <div key={butterfly.id} className='d-flex border-bottom p-4'>
             <div>
               <h3>{butterfly.name}</h3>
               <h4>{butterfly.scientific_name}</h4>
@@ -39,23 +39,25 @@ class Butterflies extends Component {
       })
 
     let filteredList = this.props.types.map(type => {
-      return type.butterflies.map(butterfly => {
-        if(butterfly.type_id === this.props.filteredType) {
-        return(
-          <div key={butterfly.id} className='d-flex border m-4 p-4'>
-            <div>
-              <h3>{butterfly.name}</h3>
-              <h4>{butterfly.scientific_name}</h4>
-              <p>{butterfly.region}</p>
-              <p>About: {butterfly.behavior}</p>
-              <p>Description: {butterfly.description}</p>
+
+      return type.butterflies
+        .filter(butterfly => butterfly.type_id === this.props.filteredType)
+        .map(butterfly => {
+          return(
+            <div key={butterfly.id} className='d-flex border m-4 p-4'>
+              <div>
+                <h3>{butterfly.name}</h3>
+                <h4>{butterfly.scientific_name}</h4>
+                <p>{butterfly.region}</p>
+                <p>About: {butterfly.behavior}</p>
+                <p>Description: {butterfly.description}</p>
+              </div>
+              <div>
+                <img className='img-fluid rounded' src={butterfly.photo_url} alt="butterfly"/>
+              </div>
             </div>
-            <div>
-              <img className='img-fluid rounded' src={butterfly.photo_url} alt="butterfly"/>
-            </div>
-          </div>
-          )}
-        })
+        )
+      })
     })
 
     //PAGINATION
@@ -74,8 +76,8 @@ class Butterflies extends Component {
           {pageList}
             <nav className='ml-5'>
               <ul className="pagination">
-                {this.state.currentPage === 1 ? "" : <li className="page-item"><button className="page-link" onClick={()=>this.previousPage()}>Previous</button></li>}
-                {this.state.currentPage === numberOfPages ? "" : <li className="page-item"><button className="page-link" onClick={()=>this.nextPage()}>Next</button></li>}
+                {this.state.currentPage === 1 ? "" : <li className="page-item"><button className="mt-2 page-link" onClick={()=>this.previousPage()}>Previous</button></li>}
+                {this.state.currentPage === numberOfPages ? "" : <li className="page-item"><button className="mt-2 page-link" onClick={()=>this.nextPage()}>Next</button></li>}
               </ul>
             </nav>
         </div>

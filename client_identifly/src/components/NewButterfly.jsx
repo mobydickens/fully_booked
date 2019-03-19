@@ -31,7 +31,7 @@ class NewButterfly extends Component {
         name: name, 
         scientific_name: scientificName,
         region: region,
-        type: type,
+        type_id: type,
         description: description,
         behavior: behavior,
         photo_url: photo_url,
@@ -63,7 +63,7 @@ class NewButterfly extends Component {
         <Header />
         <div className='container-fluid m-3'>
           <div className='row'>
-            <form className='col-md-6 m-4'>
+            <form className='col m-4'>
               <h3>Add a missing butterfly</h3>
               <div className='form-row pl-2'>
                 <div className='form-group col'>
@@ -156,7 +156,7 @@ class NewButterfly extends Component {
                 className='btn btn-success'
                 onClick={ ()=>this.submitButterfly() }>Submit</button>
             </form>
-            <div className="col-md-4 mt-5">
+            <div className="col-3 m-5">
               <img className='card-img-top rounded shadow' src={californiat} alt="cali-tortoiseshell"/>
               <div className="card-body">
                 <h4 className="card-text">California Tortoiseshell</h4>
