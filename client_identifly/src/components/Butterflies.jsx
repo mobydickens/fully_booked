@@ -31,7 +31,7 @@ class Butterflies extends Component {
               <p>Description: {butterfly.description}</p>
             </div>
             <div>
-              <img className='img-fluid rounded' src={butterfly.photo_url} alt="butterfly"/>
+              <div style={{width: 300, height: 300, backgroundImage: 'url('+ butterfly.photo_url +')', backgroundSize: 'cover'}} className='rounded'></div>
             </div>
           </div>
           )
@@ -44,16 +44,16 @@ class Butterflies extends Component {
         .filter(butterfly => butterfly.type_id === this.props.filteredType)
         .map(butterfly => {
           return(
-            <div key={butterfly.id} className='d-flex border m-4 p-4'>
+            <div key={butterfly.id} className='d-flex border-bottom p-4'>
               <div>
-                <h3>{butterfly.name}</h3>
-                <h4>{butterfly.scientific_name}</h4>
+                <h4>{butterfly.name}</h4>
+                <h5>{butterfly.scientific_name}</h5>
                 <p>{butterfly.region}</p>
                 <p>About: {butterfly.behavior}</p>
                 <p>Description: {butterfly.description}</p>
               </div>
               <div>
-                <img className='img-fluid rounded' src={butterfly.photo_url} alt="butterfly"/>
+                <div style={{width: 300, height: 300, backgroundImage: 'url('+ butterfly.photo_url +')', backgroundSize: 'cover' }} className='rounded'></div>
               </div>
             </div>
         )
