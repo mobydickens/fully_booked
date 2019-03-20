@@ -19,6 +19,12 @@ class Butterflies extends Component {
     })
   }
 
+  flatten(arr) {
+    return arr.reduce((a,b) => {
+      return a.concat(b);
+    },[]);
+  }
+
   render() {
     
     let butterflyList = this.props.types.map(type => {
@@ -41,15 +47,14 @@ class Butterflies extends Component {
       })
 
     let filteredList = this.props.types.map(type => {
-
       return type.butterflies
         .filter(butterfly => butterfly.type_id === this.props.filteredType)
         .map(butterfly => {
           return(
             <div key={butterfly.id} className='d-flex border-bottom p-4'>
               <div>
-                <h4>{butterfly.name}</h4>
-                <h5>{butterfly.scientific_name}</h5>
+                <h3>{butterfly.name}</h3>
+                <h4>{butterfly.scientific_name}</h4>
                 <p>{butterfly.region}</p>
                 <p>About: {butterfly.behavior}</p>
                 <p>Description: {butterfly.description}</p>
@@ -62,15 +67,17 @@ class Butterflies extends Component {
       })
     })
 
-    var mergedButterflyArrays = [].concat.apply([], butterflyList);
-    var numberPerPage = 5;
+    let mergedButterflyArrays = [].concat.apply([], butterflyList);
+    let numberPerPage = 5;
     let numberOfPages = Math.ceil(mergedButterflyArrays.length / numberPerPage);
+    let flattenedList = this.flatten(filteredList);
+    let numberOfFilteredPages = Math.ceil(flattenedList.length / numberPerPage);
     
     return (
       <div className='p-4 col'>
         { this.props.filteredType === 'All' 
         ? <Pagination numberOfPages={numberOfPages} numberPerPage={numberPerPage} list={mergedButterflyArrays}/>
-        : filteredList }
+        : <Pagination numberOfPages={numberOfFilteredPages} numberPerPage={numberPerPage} list={flattenedList} /> }
       </div>
     );
   }

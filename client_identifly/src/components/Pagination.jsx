@@ -10,12 +10,14 @@ class Pagination extends Component {
     this.setState({
       currentPage: this.state.currentPage - 1
     })
+    window.scrollTo(0,0);
   }
 
   nextPage = () => {
     this.setState({
       currentPage: this.state.currentPage +  1
     })
+    window.scrollTo(0,0);
   }
 
   render() {
