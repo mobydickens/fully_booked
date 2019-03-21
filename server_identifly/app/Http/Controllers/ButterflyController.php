@@ -27,6 +27,12 @@ class ButterflyController extends Controller
     return $types;
   }
 
+  public function getOneButterfly(Request $request)
+  {
+    $butterfly = Butterfly::find($request->id);
+    return $butterfly;
+  }
+
   public function create(Request $request)
   {
     $validatedData = $request->validate([
@@ -42,6 +48,10 @@ class ButterflyController extends Controller
 
     $butterfly = Butterfly::create($validatedData);
     return $butterfly;
+  }
+  public function edit(Request $request)
+  {
+    
   }
 } 
 
