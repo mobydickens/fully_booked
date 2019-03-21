@@ -12,6 +12,10 @@ class Home extends Component {
   }
 
   async componentDidMount() {
+    this.getButterflies();
+  }
+  
+  getButterflies = async () => {
     let res = await axios.get('/butterflies');
     this.setState({
       butterflyInfo: res.data
@@ -31,7 +35,10 @@ class Home extends Component {
         <div className='container-fluid'>
           <div className='row'>
             <TypesSidebar filterFn={this.filterTypeBy} types={this.state.butterflyInfo}/>
-            <Butterflies filteredType={this.state.filterType} types={this.state.butterflyInfo}/>
+            <Butterflies 
+              getButterfliesFn={this.getButterflies} 
+              filteredType={this.state.filterType} 
+              types={this.state.butterflyInfo}/>
           </div>
         </div>
         {/* <div className='p-4'>Icons made by <a 

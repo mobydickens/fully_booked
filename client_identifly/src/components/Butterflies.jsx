@@ -88,7 +88,10 @@ class Butterflies extends Component {
     return (
       <div className='p-4 col'>
         { this.state.editingMode ? 
-        <Editor butterflyId={ this.state.butterflyId } backButton={ this.backButton } />
+        <Editor 
+          getButterfliesFn={this.props.getButterfliesFn} 
+          butterflyId={ this.state.butterflyId } 
+          backButton={ this.backButton } />
         :
         <div>
           { this.props.filteredType === 'All' 

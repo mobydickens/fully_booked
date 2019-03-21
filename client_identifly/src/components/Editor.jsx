@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { withRouter } from 'react-router-dom';
 
 class Editor extends Component {
 
   state = {
     name: '',
-    scientificName: '',
+    scientific_name: '',
     region: '',
     type: '',
     description: '',
@@ -21,7 +20,7 @@ class Editor extends Component {
     let res2 = await axios.get('/types');
     this.setState({
       name: res.data.name,
-      scientificName: res.data.scientific_name,
+      scientific_name: res.data.scientific_name,
       region: res.data.region,
       description: res.data.description,
       behavior: res.data.behavior,
@@ -32,6 +31,17 @@ class Editor extends Component {
   }
 
   saveChangesToButterfly = async () => {
+    await axios.put(`/edit/${this.props.butterflyId}`, {
+      name: this.state.name,
+      scientific_name: this.state.scientific_name,
+      region: this.state.region,
+      type_id: this.state.type,
+      description: this.state.description,
+      behavior: this.state.behavior,
+      larvel_foodplants: this.state.foodplants,
+      photo_url: this.state.photo_url,
+    });
+    this.props.getButterfliesFn();
     this.props.backButton();
   }
 
@@ -68,9 +78,9 @@ class Editor extends Component {
                 className='form-control' 
                 type="text" 
                 id='sci-name'
-                onChange={(e)=>this.setState({ scientificName: e.target.value })}
+                onChange={(e)=>this.setState({ scientific_name: e.target.value })}
                 required
-                value={this.state.scientificName} />
+                value={this.state.scientific_name} />
             </div>
           </div>
           <div className='form-row pl-2'>
@@ -147,4 +157,4 @@ class Editor extends Component {
   }
 }
 
-export default withRouter(Editor);
+export default Editor;

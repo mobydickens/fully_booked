@@ -51,7 +51,28 @@ class ButterflyController extends Controller
   }
   public function edit(Request $request)
   {
-    
+    $validatedData = $request->validate([
+      'name' => 'required',
+      'scientific_name' => 'required',
+      'region' => 'required',
+      'type_id' => 'required',
+      'description' => 'required',
+      'behavior' => 'required',
+      'larvel_foodplants' => 'required',
+      'photo_url' => 'required'
+    ]);
+
+    $updatedButterfly = Butterfly::find($request->id);
+
+    $updatedButterfly->name = $request->name;
+    $updatedButterfly->scientific_name = $request->scientific_name;
+    $updatedButterfly->region = $request->region;
+    $updatedButterfly->type_id = $request->type_id;
+    $updatedButterfly->description = $request->description;
+    $updatedButterfly->behavior = $request->behavior;
+    $updatedButterfly->larvel_foodplants = $request->larvel_foodplants;
+    $updatedButterfly->photo_url = $request->photo_url;
+    $updatedButterfly->save();
   }
 } 
 

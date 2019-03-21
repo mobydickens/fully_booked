@@ -16,7 +16,7 @@ Route::get('/getbutterflies', 'ButterflyController@getAllButterflies');
 Route::get('/onebutterfly/{id}', 'ButterflyController@getOneButterfly');
 Route::get('/types', 'ButterflyController@getTypes');
 Route::post('/new', 'ButterflyController@create');
-Route::patch('/edit', 'ButterflyController@edit');
+Route::put('/edit/{id}', 'ButterflyController@edit');
 
 Route::get('/sighting', 'SightingController@getAll');
 Route::post('/newsighting', 'SightingController@create');
