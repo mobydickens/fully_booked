@@ -33,10 +33,12 @@ class Butterflies extends Component {
       editingMode: true,
       butterflyId: id
     })
+    this.props.currentlyEditing();
   }
 
   backButton = () => {
-    this.setState({ editingMode: false })
+    this.setState({ editingMode: false });
+    this.props.currentlyEditing();
   }
 
   butterflyReturn = (butterfly) => {

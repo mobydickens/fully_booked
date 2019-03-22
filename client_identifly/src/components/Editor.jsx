@@ -55,7 +55,7 @@ class Editor extends Component {
     })
 
     return (
-      <div>
+      <div className='bg-white p-4'>
         <div className='d-flex'>
           <h3>Edit this butterfly</h3>
           <button className='ml-4 btn btn-secondary' onClick={() => this.props.backButton()}>back</button>

@@ -8,7 +8,8 @@ class Home extends Component {
 
   state = {
     butterflyInfo: [],
-    filterType: 'All'
+    filterType: 'All',
+    currentlyEditing: false
   }
 
   async componentDidMount() {
@@ -28,14 +29,23 @@ class Home extends Component {
     })
   }
 
+  currentlyEditingSwitch = () => {
+    this.setState({ currentlyEditing: !this.state.currentlyEditing })
+  }
+
   render() {
     return (
       <div>
         <Header />
         <div className='container-fluid'>
-          <div className='row'>
-            <TypesSidebar filterFn={this.filterTypeBy} types={this.state.butterflyInfo}/>
+          <div className={this.state.currentlyEditing ? 'bg-secondary row' : 'row'}>
+            <TypesSidebar 
+              filterFn={this.filterTypeBy} 
+              types={this.state.butterflyInfo}
+              currentlyEditing={this.currentlyEditingSwitch}
+              editMode={this.state.currentlyEditing} />
             <Butterflies 
+              currentlyEditing={this.currentlyEditingSwitch}
               getButterfliesFn={this.getButterflies} 
               filteredType={this.state.filterType} 
               types={this.state.butterflyInfo}/>
